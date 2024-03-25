@@ -1,17 +1,37 @@
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Button, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import Logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import Copyright from "./Copyright";
-import { useState } from "react";
+import { useState } from 'react';
+import { Home, Menu } from '@mui/icons-material';
 
 export default function NavBar() {
   const navigate = useNavigate()
 
-  // const [value, setValue] = useState<number>(0)
-  // const handleChange = (route: string, newValue: number) => {
-  //   setValue(newValue)
-  //   navigate(route)
-  // }
+  const [open, setOpen] = useState<boolean>(false)
+
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={() => setOpen(!open)}>
+      <List>
+        <ListItem key={'Home'} disablePadding>
+          <ListItemButton onClick={() => navigate('/')}>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText primary={'Home'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={'Pokemons | Info'} disablePadding>
+          <ListItemButton onClick={() => navigate('/pokemon/info')}>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText primary={'Pokemons | Info'} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
 
   return (
     <>
@@ -35,14 +55,14 @@ export default function NavBar() {
           alt="LogoPokedex"
           onClick={() => navigate('/')}
         />
-        <Box sx={{ paddingRight: 20 }}>
-          {/* <Tabs value={0} onChange={(e) => handleChange(e.target.name, e.target.value)} sx={{ height: 60 }} textColor="inherit">
-            <Tab label="Item One" sx={{ height: 60 }}/>
-            <Tab label="Item Two" sx={{ height: 60 }}/>
-          </Tabs> */}
-        </Box>
+        <Button sx={{ paddingRight: 20 }} onClick={() => setOpen(true)}>
+          <Menu />
+        </Button>
       </Box>
       <Copyright />
+      <Drawer open={open} onClose={() => setOpen(false)} anchor='right'>
+        {DrawerList}
+      </Drawer>
     </>
   )
 }
