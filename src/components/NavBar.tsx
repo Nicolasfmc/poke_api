@@ -3,7 +3,7 @@ import Logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import Copyright from "./Copyright";
 import { useState } from 'react';
-import { Home, Menu } from '@mui/icons-material';
+import { Home, Menu, CatchingPokemon } from '@mui/icons-material';
 
 export default function NavBar() {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export default function NavBar() {
         <ListItem key={'Pokemons | Info'} disablePadding>
           <ListItemButton onClick={() => navigate('/pokemon/info')}>
             <ListItemIcon>
-              <Home />
+              <CatchingPokemon />
             </ListItemIcon>
             <ListItemText primary={'Pokemons | Info'} />
           </ListItemButton>
