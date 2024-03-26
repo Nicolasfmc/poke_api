@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './pages/Home';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -29,12 +29,18 @@ const queryClient = new QueryClient({
   },
 })
 
-root.render(
+const App = () => {
+  const [pokemonId, setPokemonId] = useState<number>(1)
+
+  return (
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AppContext.Provider value={{}}>
+      <AppContext.Provider value={{ pokemonId, setPokemonId }}>
         <RouterProvider router={router}/>
       </AppContext.Provider>
     </QueryClientProvider>
   </React.StrictMode>
-);
+  )
+}
+
+root.render(<App />);

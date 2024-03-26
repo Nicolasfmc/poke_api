@@ -11,7 +11,7 @@ const Pokemon = () => {
   const [pokemonId, setPokemonId] = useState<number>(1)
   const [pokemon, setPokemon] = useState<IPokemon | null>(null)
 
-  const getPokemonObj = useMutation((id: number) => getPokemon(id), {
+  const getPokemonObj = useMutation((id: number) => getPokemon(id), { // TODO: passar req pro index e usar useEffect
     onSuccess: (r) => {
       setPokemonId(r.data.id)
       setPokemon(r.data)
@@ -43,11 +43,7 @@ const Pokemon = () => {
         justifyContent: 'center',
         flexDirection: 'column'
       }}>
-        <Carousel
-          currentPokemonId={pokemonId}
-          onNext={() => getPokemonObj.mutateAsync(limitPokemon(pokemonId + 1))}
-          onPrev={() => getPokemonObj.mutateAsync(limitPokemon(pokemonId - 1))}
-        />
+        <Carousel />
       </Box>
     </Box>
   )
